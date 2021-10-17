@@ -1,2 +1,2 @@
 # slow_logger
-a multi thread for a logger.
+a logger lib with multi thread.
