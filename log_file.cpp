@@ -52,6 +52,7 @@ int LogFile::Open(const string& file_name)
 
     if(!_the_file.is_open())
     {
+        cerr << "can't open file:" << _file_name << std::endl;
         return ErrDef::kFileERR;
     }
     return ErrDef::kOK;   
@@ -77,15 +78,13 @@ int LogFile::GetFileSize()
 //the caller should guarantee there no data is written when rotate
 int LogFile::Rotate()
 {
-    if(!_the_file.is_open())
-    {
-        return ErrDef::kFileERR;
-    }
-
     string time_str = TimeUtil::GetTimeHourStr();
     string new_file_name = _file_name + time_str;
     rename(_file_name.c_str(), new_file_name.c_str());
-    _the_file.close();
+    if(_the_file.is_open())
+    {
+        _the_file.close();
+    }
 
     //reopen file
     _the_file.open(_file_name);

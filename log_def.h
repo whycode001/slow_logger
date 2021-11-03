@@ -28,8 +28,6 @@ struct ErrDef
 
 
     static const int kConfKeyErr = -3;
-
-
 };
 
 struct LogRecord 
